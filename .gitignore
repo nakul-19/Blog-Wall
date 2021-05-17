@@ -231,6 +231,13 @@ Thumbs.db
 # thumbnail cache on Windows
 
 # profiling data
+### vscode ###
+.vscode/*
+.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
 
 
 ### VirtualEnv ###
@@ -245,5 +252,6 @@ Thumbs.db
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,virtualenv
