@@ -1,5 +1,5 @@
 """
-WSGI config for NewsPostApi project.
+WSGI config for BlogPost project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'NewsPostApi.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BlogPost.settings')
 
 application = get_wsgi_application()
