@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    is_tk_send = models.BooleanField(default=False)
     # auth_provider = models.CharField(
     #     max_length=255, blank=False,
     #     null=False, default=AUTH_PROVIDERS.get('email'))
