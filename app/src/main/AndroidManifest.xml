@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nakul.newspost">
+    package="com.nakul.blogWall">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
+        android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NewsPost">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.BlogWall">
+        <activity
+            android:name=".activities.LoginActivity"
+            android:resizeableActivity="false"
+            android:theme="@style/Theme.BlogWall" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:resizeableActivity="false"
+            android:theme="@style/Theme.BlogWall.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.MainActivity"
+            android:resizeableActivity="false"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
