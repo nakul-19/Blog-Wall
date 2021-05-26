@@ -1,5 +1,6 @@
 asgiref==3.3.4
 Django==3.2.3
+django-cors-headers==3.7.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.7.0
 PyJWT==2.1.0
