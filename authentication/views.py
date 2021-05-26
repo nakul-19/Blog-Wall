@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, serializers, status, views, permissions
-from .serializers import RegisterSerializer, EmailVerificationSerializer, LoginSerializer, LogoutSerializer, ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
+from .serializers import (RegisterSerializer, EmailVerificationSerializer, LoginSerializer, LogoutSerializer,
+ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer, UserSerializer)
 from rest_framework.response import Response
 from django.http import HttpResponse
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -15,6 +16,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
+from rest_framework.permissions import IsAuthenticated
+from BlogApi.permissions import IsOwner
 import os
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -81,6 +84,23 @@ class LoginAPIView(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class OwnerListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        """Returns only the object related to current user"""
+        user = self.request.user
+        return User.objects.filter(email=user)
+
+
+class OwnerUpdateRetriveDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset            = User.objects.all()
+    serializer_class    = UserSerializer
+
+    permission_classes  = (IsAuthenticated, IsOwner)
+
 
 
 class RequestPasswordResetEmail(generics.GenericAPIView):

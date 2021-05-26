@@ -77,6 +77,30 @@ class LoginSerializer(serializers.ModelSerializer):
 
         return super().validate(attrs)
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('__all__')
+        # make password field
+        extra_kwargs = {
+            'password' : {
+                # make password write only
+                'write_only' : True,
+                # set input style password
+                'style' : {'input_type' : 'password'}
+            }
+        }
+
+    
+    def update(self, instance, validated_data):
+        print('user updated')
+        if 'password' in validated_data:
+            password = validated_data.pop('password')
+            instance.set_password(password)
+
+        return super().update(instance, validated_data) 
+
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length=2)
