@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'authentication',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'drf_yasg',
+
 
 ]
 
@@ -90,6 +92,15 @@ DATABASES = {
     }
 }
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
 # SIMPLE_JWT = {
 #     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=1),
 #     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
