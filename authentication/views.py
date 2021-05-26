@@ -32,7 +32,7 @@ class RegisterView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         user_data = serializer.data
-        print(user_data['is_tk_send'], 'llll')
+        # print(user_data['is_tk_send'], 'llll')
         # is_tk_send = user_data['is_tk_send']
         user = User.objects.get(email=user_data['email'])
         # if not is_tk_send:
