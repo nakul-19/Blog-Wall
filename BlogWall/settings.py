@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'BlogApi',
+     'posts',
     'authentication',
-    'rest_framework_simplejwt.token_blacklist',
+    # 'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'drf_yasg',
-
+     'pagedown',
+     'markdown_deux',
+     'comments'
 
 ]
 
@@ -102,16 +104,17 @@ SWAGGER_SETTINGS = {
     }
 }
 # SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=1),
-#     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+#      'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+# #     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 # }
 
 REST_FRAMEWORK = {
     
     'NON_FIELD_ERRORS_KEY': 'error',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ]
 
 }
 
@@ -155,6 +158,15 @@ CORS_ALLOW_CREDENTIALS = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    #'/var/www/static/',
+]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

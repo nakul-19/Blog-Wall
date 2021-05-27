@@ -17,7 +17,6 @@ from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnico
 from django.shortcuts import redirect
 from django.http import HttpResponsePermanentRedirect
 from rest_framework.permissions import IsAuthenticated
-from BlogApi.permissions import IsOwner
 import os
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -105,9 +104,9 @@ class OwnerUpdateRetriveDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset            = User.objects.all()
     serializer_class    = UserSerializer
 
-    permission_classes  = (IsAuthenticated, IsOwner)
+    permission_classes  = (IsAuthenticated,)
 
-
+    
 
 class RequestPasswordResetEmail(generics.GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
@@ -178,12 +177,12 @@ class SetNewPasswordAPIView(generics.GenericAPIView):
 class LogoutAPIView(generics.GenericAPIView):
     serializer_class = LogoutSerializer
 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [permissions.IsAuthenticated,]
 
     def post(self, request):
 
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        # serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)

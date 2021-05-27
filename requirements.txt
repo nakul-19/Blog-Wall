@@ -5,6 +5,8 @@ coreapi==2.3.3
 coreschema==0.0.4
 Django==3.2.3
 django-cors-headers==3.7.0
+django-markdown-deux==1.0.5
+django-pagedown==2.2.0
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.7.0
 drf-yasg==1.20.0
@@ -12,8 +14,10 @@ idna==2.10
 inflection==0.5.1
 itypes==1.2.0
 Jinja2==3.0.1
+markdown2==2.4.0
 MarkupSafe==2.0.1
 packaging==20.9
+Pillow==8.2.0
 PyJWT==2.1.0
 pyparsing==2.4.7
 python-dotenv==0.17.1
