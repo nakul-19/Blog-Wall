@@ -40,7 +40,6 @@ from .serializers import (
 
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
-    #serializer_class = PostCreateUpdateSerializer
     # permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
@@ -70,27 +69,6 @@ class CommentDetailAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView)
         return self.destroy(request, *args, **kwargs)
 
 
-
-# class PostUpdateAPIView(RetrieveUpdateAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostCreateUpdateSerializer
-#     lookup_field = 'slug'
-#     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-#     #lookup_url_kwarg = "abc"
-#     def perform_update(self, serializer):
-#         serializer.save(user=self.request.user)
-#         #email send_email
-
-
-
-# class PostDeleteAPIView(DestroyAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostDetailSerializer
-#     lookup_field = 'slug'
-#     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-#     #lookup_url_kwarg = "abc"
-
-
 class CommentListAPIView(ListAPIView):
     serializer_class = CommentListSerializer
     permission_classes = [AllowAny]
@@ -99,7 +77,6 @@ class CommentListAPIView(ListAPIView):
     pagination_class = PostPageNumberPagination #PageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
-        #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
         queryset_list = Comment.objects.filter(id__gte=0) #filter(user=self.request.user)
         query = self.request.GET.get("q")
         if query:

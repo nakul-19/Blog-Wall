@@ -27,11 +27,15 @@ class UserManager(BaseUserManager):
     
 
 class User(AbstractBaseUser, PermissionsMixin):
+    def nameFile(instance, filename):
+     return '/'.join(['images', str(instance.username), filename])
+
     username = models.CharField(max_length=255, unique=True, db_index=True)
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    profile_pic = models.ImageField(upload_to=nameFile,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_tk_send = models.BooleanField(default=False)
     # auth_provider = models.CharField(

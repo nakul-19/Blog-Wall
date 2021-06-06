@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'drf_yasg',
      'pagedown',
      'markdown_deux',
-     'comments'
+     'comments',
+     'django_filters'
 
 ]
 
@@ -114,7 +115,11 @@ REST_FRAMEWORK = {
         
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    
+    'DEFAULT_FILTER_BACKENDS':
+    ['django_filters.rest_framework.DjangoFilterBackend']
+
 
 }
 
@@ -166,7 +171,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

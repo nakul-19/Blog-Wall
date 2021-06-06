@@ -20,7 +20,9 @@ class PostCreateUpdateSerializer(ModelSerializer):
             'title',
             #'slug',
             'content',
-            'publish'
+            'publish',
+            'topic',
+            'image'
         ]
 
 
@@ -49,6 +51,7 @@ class PostDetailSerializer(ModelSerializer):
             'publish',
             'image',
             'comments',
+            'topic'
         ]
 
     def get_html(self, obj):
@@ -84,6 +87,8 @@ class PostListSerializer(ModelSerializer):
             'title',
             'content',
             'publish',
+            'image',
+            'topic'
         ]
 
 

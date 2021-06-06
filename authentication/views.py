@@ -73,13 +73,13 @@ class VerifyEmail(views.APIView):
                 user.is_verified = True
                 user.save()
         
-            return HttpResponse({'Successfully activated'}, status=status.HTTP_200_OK)
+            return HttpResponse({'Successfully activated, Login to your account.'}, status=status.HTTP_200_OK)
         except jwt.ExpiredSignatureError as identifier:
             u = User.objects.get(email=e)
             u.delete()
-            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse({'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError as identifier:
-            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse({ 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginAPIView(generics.GenericAPIView):
