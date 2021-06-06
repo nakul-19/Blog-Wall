@@ -4,6 +4,10 @@
 ```
 $ git clone https://github.com/nakul-19/Blog-Wall.git
 ```
+- Change Branch to `backend` using 
+```
+$ git checkout backend
+```
 - Setup Virtual environment
 ```
 $ python3 -m venv env
