@@ -21,7 +21,7 @@ from .serializers import LikeListSerializer, create_like_serializer
 
 class LikeCreateAPIView(CreateAPIView):
     queryset = Like.objects.all()
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         model_type = self.request.GET.get("type")
