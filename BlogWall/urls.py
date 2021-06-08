@@ -41,6 +41,8 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('api/posts/', include('posts.api.urls',namespace='posts-api')),
     path('api/comments/', include("comments.api.urls", namespace='comments-api')),
+    path('api/likes/', include("likes.api.urls", namespace='likes-api')),
+
     path('swagger/', schema_view.with_ui('swagger',
                                  cache_timeout=0), name='schema-swagger-ui'),
 

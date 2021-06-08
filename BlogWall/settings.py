@@ -48,7 +48,8 @@ INSTALLED_APPS = [
      'pagedown',
      'markdown_deux',
      'comments',
-     'django_filters'
+     'django_filters',
+     'likes'
 
 ]
 

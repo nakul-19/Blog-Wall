@@ -34,9 +34,6 @@ class Comment(models.Model):
         ordering = ['-timestamp']
 
 
-    def __unicode__(self):  
-        return str(self.user.username)
-
     def __str__(self):
         return str(self.user.username)
 

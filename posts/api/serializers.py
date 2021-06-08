@@ -7,10 +7,11 @@ from rest_framework.serializers import (
 
 from authentication.serializers import UserSerializer
 from comments.api.serializers import CommentSerializer
+from likes.api.serializers import LikeListSerializer
 from comments.models import Comment
 
 from posts.models import Post
-
+from likes.models import Like
 
 class PostCreateUpdateSerializer(ModelSerializer):
     class Meta:
@@ -25,6 +26,13 @@ class PostCreateUpdateSerializer(ModelSerializer):
             'image'
         ]
 
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image
+
 
 
 
@@ -38,6 +46,8 @@ class PostDetailSerializer(ModelSerializer):
     image = SerializerMethodField()
     html = SerializerMethodField()
     comments = SerializerMethodField()
+    likes = SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
@@ -51,7 +61,8 @@ class PostDetailSerializer(ModelSerializer):
             'publish',
             'image',
             'comments',
-            'topic'
+            'topic',
+            'likes'
         ]
 
     def get_html(self, obj):
@@ -68,6 +79,12 @@ class PostDetailSerializer(ModelSerializer):
         c_qs = Comment.objects.filter_by_instance(obj)
         comments = CommentSerializer(c_qs, many=True).data
         return comments
+    
+    def get_likes(self, obj):
+        c_qs = Like.objects.filter_by_instance(obj)
+        comments = LikeListSerializer(c_qs, many=True).data
+        return comments
+
 
 
 
@@ -91,29 +108,9 @@ class PostListSerializer(ModelSerializer):
             'topic'
         ]
 
-
-
-
-""""
-
-from posts.models import Post
-from posts.api.serializers import PostDetailSerializer
-
-
-data = {
-    "title": "Yeahh buddy",
-    "content": "New content",
-    "publish": "2016-2-12",
-    "slug": "yeah-buddy",
-    
-}
-
-obj = Post.objects.get(id=2)
-new_item = PostDetailSerializer(obj, data=data)
-if new_item.is_valid():
-    new_item.save()
-else:
-    print(new_item.errors)
-
-
-"""
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image

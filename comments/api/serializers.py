@@ -66,6 +66,8 @@ def create_comment_serializer(model_type='post', slug=None, parent_id=None, user
 
 class CommentSerializer(ModelSerializer):
     reply_count = SerializerMethodField()
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = [
@@ -76,6 +78,7 @@ class CommentSerializer(ModelSerializer):
             'content',
             'reply_count',
             'timestamp',
+            'user'
         ]
     
     def get_reply_count(self, obj):
@@ -89,6 +92,7 @@ class CommentListSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
         view_name='comments-api:thread')
     reply_count = SerializerMethodField()
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Comment
         fields = [
@@ -100,6 +104,7 @@ class CommentListSerializer(ModelSerializer):
             'content',
             'reply_count',
             'timestamp',
+            'user'
         ]
     
     def get_reply_count(self, obj):

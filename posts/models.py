@@ -11,27 +11,21 @@ from django.utils.text import slugify
 
 from markdown_deux import markdown
 from comments.models import Comment
-
+from likes.models import Like
 from .utils import get_read_time
-# MVC MODEL VIEW CONTROLLER
-
-
-#Post.objects.all()
-#Post.objects.create(user=user, title="Some time")
 
 choices = (
     ('Technology', 'Technology'),
     ('Entertainment', 'Entertainment'),
     ('Sports', 'Sports'),
     ('Health', 'Health'),
-    ('General','General'),
-    ('Business','Business')
+    ('Global Affairs','Global Affairs'),
+    ('Science','Science')
     
 )
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        # Post.objects.all() = super(PostManager, self).all()
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
@@ -59,9 +53,7 @@ class Post(models.Model):
 
     objects = PostManager()
 
-    def __unicode__(self):
-        return self.title
-
+    
     def __str__(self):
         return self.title
 
@@ -80,6 +72,12 @@ class Post(models.Model):
     def comments(self):
         instance = self
         qs = Comment.objects.filter_by_instance(instance)
+        return qs
+
+    @property
+    def likes(self):
+        instance = self
+        qs = Like.objects.filter_by_instance(instance)
         return qs
 
     @property
