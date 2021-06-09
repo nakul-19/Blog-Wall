@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os, datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +29,7 @@ SECRET_KEY = 'django-insecure-ftl_@a)la&n)9ud0=jtdin&l)61#l66h2)-dm&d2d-@)q6+e_n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', '0.0.0.0']
 
 AUTH_USER_MODEL = 'authentication.User'
 
@@ -179,9 +182,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from dotenv import load_dotenv
-
-load_dotenv()
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
