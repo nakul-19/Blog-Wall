@@ -1,22 +1,39 @@
+from django.http.request import RAISE_ERROR
 from rest_framework import serializers
 from .models import User
 from django.contrib import auth
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, ErrorDetail
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from rest_framework.exceptions import ParseError
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(max_length=68, min_length=6, write_only=True)
-
-    default_error_messages = {
-        'username': 'The username should only contain alphanumeric characters'}
-
+    password = serializers.CharField(max_length=68, write_only=True)
     class Meta:
         model = User
         fields = ['email', 'username', 'password']
+
+    
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        password = attrs.get('password', '')
+        print("kkkk")
+        try:
+            validate_email( email )
+            if len(password) < 6:
+                raise ParseError('Ensure this field has at least 6 characters.')    
+            return attrs
+
+        except ValidationError:
+            raise ParseError('Enter a valid email.')
+
+            
+        
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
