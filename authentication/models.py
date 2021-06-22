@@ -30,7 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def nameFile(instance, filename):
      return '/'.join(['images', str(instance.username), filename])
 
-    username = models.CharField(max_length=255, unique=True, db_index=True)
+    username = models.CharField(max_length=255, db_index=True)
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

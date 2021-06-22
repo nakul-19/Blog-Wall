@@ -14,6 +14,8 @@ from pathlib import Path
 import os, datetime
 from dotenv import load_dotenv
 import django_heroku
+import environ
+env = environ.Env()
 
 load_dotenv()
 
@@ -192,6 +194,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 django_heroku.settings(locals())
