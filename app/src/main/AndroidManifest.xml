@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nakul.blogWall">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,7 +12,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BlogWall">
+        android:theme="@style/Theme.BlogWall"
+        tools:ignore="AllowBackup">
+        <activity android:name=".activities.BlogActivity" android:theme="@style/Theme.BlogWall"/>
+        <activity
+            android:name=".activities.CategoryActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
+        <activity android:name=".activities.ForgotPasswordActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="blogwall.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
             android:resizeableActivity="false"
@@ -26,8 +44,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"
-            android:resizeableActivity="false"/>
+        <activity
+            android:name=".activities.MainActivity"
+            android:resizeableActivity="false"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

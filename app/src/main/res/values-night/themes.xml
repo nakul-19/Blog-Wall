@@ -16,7 +16,13 @@
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@drawable/input_style</item>
         <item name="android:textColorHint">@color/grey</item>
+        <item name="errorTextAppearance">@style/ErrorInputStyle</item>
         <item name="boxStrokeWidth">1dp</item>
+    </style>
+
+    <style name="ErrorInputStyle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/autofill</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Theme.BlogWall.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">

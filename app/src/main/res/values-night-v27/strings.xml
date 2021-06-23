@@ -5,7 +5,12 @@
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="sign_in">SIGN IN</string>
+    <string name="register_successful">Registered successfully.\nCheck your mail for verification.</string>
+    <string name="register_failed">Registeration failed. Please try again later.</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">SIGN UP</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="trending_blogs">Trending Blogs</string>
+    <string name="categories">Categories</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
