@@ -90,7 +90,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('__all__')
+        fields = ['id', 'email', 'password', 'username', 'created_at','profile_pic','last_login','is_verified','is_active','is_tk_send']
         # make password field
         extra_kwargs = {
             'password' : {
@@ -98,6 +98,9 @@ class UserSerializer(serializers.ModelSerializer):
                 'write_only' : True,
                 # set input style password
                 'style' : {'input_type' : 'password'}
+            },
+            'is_verified' : {
+                'read_only' : True
             }
         }
 
