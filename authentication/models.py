@@ -38,9 +38,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     profile_pic = models.ImageField(upload_to=nameFile,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_tk_send = models.BooleanField(default=False)
-    # auth_provider = models.CharField(
-    #     max_length=255, blank=False,
-    #     null=False, default=AUTH_PROVIDERS.get('email'))
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
