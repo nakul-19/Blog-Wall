@@ -10,6 +10,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework.exceptions import ParseError
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.http import JsonResponse
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -22,7 +23,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         email = attrs.get('email', '')
         password = attrs.get('password', '')
-        print("kkkk")
         try:
             validate_email( email )
             if len(password) < 6:
@@ -46,45 +46,6 @@ class EmailVerificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email','token']
-
-
-class LoginSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(max_length=255, min_length=3)
-    password = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    username = serializers.CharField(max_length=255, min_length=3, read_only=True)
-    tokens = serializers.SerializerMethodField()
-
-    def get_tokens(self, obj):
-        user = User.objects.get(email=obj['email'])
-
-        return {
-            'refresh': user.tokens()['refresh'],
-            'access': user.tokens()['access']
-        }
-
-    class Meta:
-        model = User
-        fields = ['email', 'password', 'username', 'tokens']
-
-    def validate(self, attrs):
-        email = attrs.get('email', '')
-        password = attrs.get('password', '')
-        user = auth.authenticate(email=email, password=password)
-        
-        if not user:
-            raise AuthenticationFailed('Invalid credentials, try again')
-        if not user.is_active:
-            raise AuthenticationFailed('Account disabled, contact admin')
-        if not user.is_verified:
-            raise AuthenticationFailed('Please verify your email. Check your inbox for details.')
-
-        return {
-            'email': user.email,
-            'username': user.username,
-            'tokens': user.tokens
-        }
-
-        return super().validate(attrs)
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -112,6 +73,56 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data) 
+
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(max_length=255, min_length=3)
+    password = serializers.CharField(max_length=68, min_length=6, write_only=True)
+    username = serializers.CharField(max_length=255, min_length=3, read_only=True)
+    tokens = serializers.SerializerMethodField()
+    is_verified = serializers.BooleanField(default=False)
+    created_at = serializers.DateTimeField(read_only=True)
+    id = serializers.IntegerField(read_only=True)
+    profile_pic = serializers.ImageField(read_only=True)
+    
+    def get_tokens(self, obj):
+
+        user = User.objects.get(email=obj['email'])
+
+        return {
+            'refresh': user.tokens()['refresh'],
+            'access': user.tokens()['access']
+        }
+    
+    
+    class Meta:
+        model = User
+        fields = ['id','email', 'password', 'username', 'tokens','is_verified','created_at','profile_pic']
+
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        password = attrs.get('password', '')
+        user = auth.authenticate(email=email, password=password)
+        
+        if not user:
+            raise AuthenticationFailed('Invalid credentials, try again')
+        if not user.is_active:
+            raise AuthenticationFailed('Account disabled, contact admin')
+        if not user.is_verified:
+            raise AuthenticationFailed('Please verify your email. Check your inbox for details.')
+
+        return {
+            'email': user.email,
+            'username': user.username,
+            'tokens': user.tokens,
+            'is_verified' : user.is_verified,
+            'created_at' : user.created_at,
+            'id': user.id,
+            'profile_pic': user.profile_pic
+        }
+
+        return super().validate(attrs)
 
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
