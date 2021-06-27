@@ -102,6 +102,7 @@ class PostListSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = [
+            'id',
             'url',
             'user',
             'title',
