@@ -62,7 +62,8 @@ class PostDetailSerializer(ModelSerializer):
             'image',
             'comments',
             'topic',
-            'likes'
+            'likes',
+            'read_time'
         ]
 
     def get_html(self, obj):
@@ -96,6 +97,8 @@ class PostListSerializer(ModelSerializer):
         )
 
     user = UserSerializer(read_only=True)
+    likes = SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
@@ -105,7 +108,9 @@ class PostListSerializer(ModelSerializer):
             'content',
             'publish',
             'image',
-            'topic'
+            'topic',
+            'likes',
+            'read_time'
         ]
 
     def get_image(self, obj):
@@ -114,3 +119,8 @@ class PostListSerializer(ModelSerializer):
         except:
             image = None
         return image
+
+    def get_likes(self, obj):
+        c_qs = Like.objects.filter_by_instance(obj)
+        comments = LikeListSerializer(c_qs, many=True).data
+        return comments
