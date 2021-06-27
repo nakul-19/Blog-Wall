@@ -15,7 +15,6 @@ from rest_framework.generics import (
     )
 
 
-
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -25,7 +24,7 @@ from rest_framework.permissions import (
 
 from posts.models import Post
 
-from .pagination import  PostPageNumberPagination
+from .pagination import  LimitOffsetPagination
 from .permissions import IsOwnerOrReadOnly
 
 from .serializers import (
@@ -76,7 +75,7 @@ class PostListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     search_fields = ['title', 'content', 'user__username']
     filterset_class = PostFilter
-    pagination_class = PostPageNumberPagination 
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
         queryset_list = Post.objects.all() #filter(user=self.request.user)
