@@ -48,14 +48,14 @@ class PostCreateAPIView(CreateAPIView):
 class PostDetailAPIView(RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    lookup_field = 'slug'
+    lookup_field = 'id'
     permission_classes = [AllowAny]
 
 
 class PostUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateUpdateSerializer
-    lookup_field = 'slug'
+    lookup_field = 'id'
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
@@ -65,7 +65,7 @@ class PostUpdateAPIView(RetrieveUpdateAPIView):
 class PostDeleteAPIView(DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    lookup_field = 'slug'
+    lookup_field = 'id'
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
 
 

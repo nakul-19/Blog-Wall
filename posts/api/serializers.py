@@ -40,7 +40,7 @@ class PostDetailSerializer(ModelSerializer):
 
     url = HyperlinkedIdentityField(
         view_name='posts-api:detail',
-        lookup_field='slug'
+        lookup_field='id'
         )
     user = UserSerializer(read_only=True)
     image = SerializerMethodField()
@@ -55,7 +55,7 @@ class PostDetailSerializer(ModelSerializer):
             'id',
             'user',
             'title',
-            'slug',
+            # 'slug',
             'content',
             'html',
             'publish',
@@ -92,7 +92,7 @@ class PostListSerializer(ModelSerializer):
     
     url = HyperlinkedIdentityField(
         view_name='posts-api:detail',
-        lookup_field='slug'
+        lookup_field='id'
         )
 
     user = UserSerializer(read_only=True)
