@@ -11,7 +11,6 @@ from rest_framework.generics import (
     ListAPIView, 
     UpdateAPIView,
     RetrieveAPIView,
-    RetrieveUpdateAPIView
     )
 
 
@@ -52,7 +51,7 @@ class PostDetailAPIView(RetrieveAPIView):
     permission_classes = [AllowAny]
 
 
-class PostUpdateAPIView(RetrieveUpdateAPIView):
+class PostUpdateAPIView(UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateUpdateSerializer
     lookup_field = 'id'
