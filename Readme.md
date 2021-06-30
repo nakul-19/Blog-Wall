@@ -61,22 +61,22 @@ $ python3 manage.py createsuperuser
 ```
 $ python3 manage.py runserver
 ``` 
-## Team:
+## Developers:
 
 > "Alone we can do so little; together we can do so much."
 
 | S.No. | Name | Role | GitHub Username:octocat: |
 | --------------- | --------------- | --------------- | --------------- |
-| 1. | Nakul Sharma | Android Development | [@nakul-19](https://github.com/nakul-19) |
+| 1. | Nakul | Android Development | [@nakul-19](https://github.com/nakul-19) |
 | 2. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
 
 
-## Contributors ✨
+## Maintainers ✨
 
 <table>
   <tbody><tr>
     <td align="center"><a href="https://github.com/rudrakshi99"><img alt="" src="https://avatars.githubusercontent.com/rudrakshi99" width="100px;"><br><sub><b>Rudrakshi</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits/backend?author=rudrakshi99" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/nakul-19"><img alt="" src="https://avatars.githubusercontent.com/nakul-19" width="100px;"><br><sub><b>Nakul Sharma</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=nakul-19" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nakul-19"><img alt="" src="https://avatars.githubusercontent.com/nakul-19" width="100px;"><br><sub><b>Nakul </b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=nakul-19" title="Code">💻</a></td>
   </tr>
 </tbody></table>
 
