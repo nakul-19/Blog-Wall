@@ -57,3 +57,26 @@ $ python3 manage.py createsuperuser
 ```
 $ python3 manage.py runserver
 ``` 
+## Team:
+
+> "Alone we can do so little; together we can do so much."
+
+| S.No. | Name | Role | GitHub Username:octocat: |
+| --------------- | --------------- | --------------- | --------------- |
+| 1. | Nakul Sharma | Android Development | [@nakul-19](https://github.com/nakul-19) |
+| 2. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
+
+
+## Contributors ✨
+
+<table>
+  <tbody><tr>
+    <td align="center"><a href="https://github.com/rudrakshi99"><img alt="" src="https://avatars.githubusercontent.com/rudrakshi99" width="100px;"><br><sub><b>Rudrakshi</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=rudrakshi99" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nakul-19"><img alt="" src="https://avatars.githubusercontent.com/nakul-19" width="100px;"><br><sub><b>Nakul Sharma</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=nakul-19" title="Code">💻</a></td>
+  </tr>
+</tbody></table>
+
+[![Uses Git](https://forthebadge.com/images/badges/uses-git.svg)](https://github.com/nakul-19/Blog-Wall) 
+[![ForTheBadge ANDROID](https://forthebadge.com/images/badges/built-for-android.svg)](https://github.com/nakul-19/Blog-Wall)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://github.com/nakul-19/Blog-Wall)
+[![Built with love](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/nakul-19/Blog-Wall) [![Built By Developers](https://forthebadge.com/images/badges/built-by-developers.svg)](https://github.com/nakul-19/Blog-Wall) 
