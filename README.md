@@ -2,18 +2,6 @@
 
 Blog wall is a blogging android application where readers can find lots of insightful and informational articles related to a wide variety of topics that include technology, science, health, etc. Anyone can share their ideas through publishing their useful blogs and engage in conversation with a network of readers and writers by interacting with the content.
 
-## Technology Stack to be used:
-
-<img src="https://img.shields.io/badge/kotlin-%230095D5.svg?&style=for-the-badge&logo=kotlin&logoColor=white"/> <img src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/sqlite-0B96B2?style=for-the-badge&logo=sqlite&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
-
-
-- **Android**: Kotlin
-- **Backend**: Django Rest Framework
-- **IDE**: VS Code
-- **API Testing & Documentation**: Swagger
-- **Version Control**: Git and GitHub
-- **Database**: Sqlite
-- **Hosting**: Heroku
 
 #### GitHub Repository Structure
 
@@ -24,21 +12,21 @@ Blog wall is a blogging android application where readers can find lots of insig
 
 
 
-## Team:
+## Developers:
 
 > "Alone we can do so little; together we can do so much."
 
 | S.No. | Name | Role | GitHub Username:octocat: |
 | --------------- | --------------- | --------------- | --------------- |
-| 1. | Nakul Sharma | Android Development | [@nakul-19](https://github.com/nakul-19) |
+| 1. | Nakul | Android Development | [@nakul-19](https://github.com/nakul-19) |
 | 2. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
 
 
-## Contributors ✨
+## Maintainers ✨
 
 <table>
   <tbody><tr>
-    <td align="center"><a href="https://github.com/nakul-19"><img alt="" src="https://avatars.githubusercontent.com/nakul-19" width="100px;"><br><sub><b>Nakul Sharma</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=nakul-19" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nakul-19"><img alt="" src="https://avatars.githubusercontent.com/nakul-19" width="100px;"><br><sub><b>Nakul </b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits?author=nakul-19" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/rudrakshi99"><img alt="" src="https://avatars.githubusercontent.com/rudrakshi99" width="100px;"><br><sub><b>Rudrakshi</b></sub></a><br><a href="https://github.com/nakul-19/Blog-Wall/commits/backend?author=rudrakshi99" title="Code">💻</a></td>
 
   </tr>
