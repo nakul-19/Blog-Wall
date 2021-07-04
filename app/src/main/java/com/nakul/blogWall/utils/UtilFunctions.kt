@@ -2,7 +2,9 @@ package com.nakul.blogWall.utils
 
 import android.os.Handler
 import android.widget.Button
+import java.text.SimpleDateFormat
 import java.time.LocalTime
+import java.util.*
 
 object UtilFunctions {
 
@@ -37,5 +39,20 @@ object UtilFunctions {
         Handler().postDelayed({
             this.load(false)
         }, 400)
+    }
+
+    fun String.toDate(
+        dateFormat: String = "yyyy-MM-dd",
+        timeZone: TimeZone = TimeZone.getTimeZone("UTC")
+    ): Date {
+        val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+        parser.timeZone = timeZone
+        return parser.parse(this)!!
+    }
+
+    fun Date.format(dateFormat: String = "dd MMM',' yyyy", timeZone: TimeZone = TimeZone.getDefault()): String {
+        val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
+        formatter.timeZone = timeZone
+        return formatter.format(this)
     }
 }

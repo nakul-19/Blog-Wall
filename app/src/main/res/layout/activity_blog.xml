@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/black"
     tools:context=".activities.BlogActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@color/white_ex"
-            app:layout_scrollFlags="scroll|snap">
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/image"
@@ -29,132 +30,183 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_marginTop="-26dp"
+        android:clipToPadding="true"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="10dp"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/heading"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:fontFamily="@font/dm_serif_display_regular"
-                android:text="Sample Heading"
-                android:textColor="@color/text_black"
-                android:textSize="26sp"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans"
-                android:padding="10dp"
-                android:textColor="#434343"
-                android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/heading" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView3"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/heading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/dm_serif_display_regular"
+                        android:text="Sample Heading"
+                        android:textColor="@color/text_black"
+                        android:textSize="32sp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="6dp"
+                        android:fontFamily="@font/open_sans"
+                        android:padding="10dp"
+                        android:textColor="#434343"
+                        android:textSize="16sp"
+                        app:layout_constraintTop_toBottomOf="@id/heading" />
+
+                    <TextView
+                        android:id="@+id/content_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/text_black"
+                        android:fontFamily="@font/open_sans"
+                        android:padding="10dp"
+                        android:textSize="16sp"
+                        app:layout_constraintTop_toBottomOf="@id/content" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/open_sans"
+                        android:paddingHorizontal="12sp"
+                        android:text="Written by"
+                        android:textColor="#434343"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/author_image"
+                        app:layout_constraintTop_toBottomOf="@id/content" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dm_serif_display_regular"
+                        android:paddingHorizontal="12sp"
+                        android:singleLine="true"
+                        android:text="Khun Agures"
+                        android:textColor="@color/text_black"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/author_image"
+                        app:layout_constraintTop_toBottomOf="@id/materialTextView3" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/author_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="28dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+                    <LinearLayout
+                        android:id="@+id/action_buttons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/author_image">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/like_icon"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
+                            app:srcCompat="@drawable/ic_clap" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/likes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:gravity="center"
+                            android:text="935"
+                            android:textColor="@color/text_black"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/comment_button"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="28dp"
+                            android:scaleX="0.8"
+                            android:scaleY="0.8"
+                            app:srcCompat="@drawable/ic_comment" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:gravity="center"
+                            android:text="935"
+                            android:textColor="@color/text_black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="40dp"
+                        android:fontFamily="@font/open_sans"
+                        android:gravity="center"
+                        android:padding="6dp"
+                        android:text="Show Comments"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/action_buttons" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/open_sans"
-                android:paddingHorizontal="12sp"
-                android:text="Written by"
-                android:textColor="#434343"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@id/author_image"
-                app:layout_constraintTop_toBottomOf="@id/content" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/author_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/dm_serif_display_italic"
-                android:paddingHorizontal="12sp"
-                android:singleLine="true"
-                android:text="Khun Agures"
-                android:textColor="@color/text_black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/author_image"
-                app:layout_constraintTop_toBottomOf="@id/materialTextView3" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/author_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/content" />
-
-            <LinearLayout
-                android:id="@+id/action_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/author_image">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/like_button"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="20dp"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
-                    app:srcCompat="@drawable/ic_not_liked"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/likes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="4dp"
-                    android:gravity="center"
-                    android:text="935"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"/>
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/comment_button"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="28dp"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    app:srcCompat="@drawable/ic_comment"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/comments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="4dp"
-                    android:gravity="center"
-                    android:text="935"
-                    android:textColor="@color/text_black"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="Show Comments"
-                android:textAllCaps="true"
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
+                android:layout_margin="20dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_clap_filled"
+                app:backgroundTint="@color/white_ex"
+                app:elevation="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/action_buttons"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/black" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -40,7 +40,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         signinEvent = _signinEvent
         _signinEvent.value = null
         repository = AuthRepository(AuthInterface())
-        sharedPreferences = application.applicationContext.getSharedPreferences(
+        sharedPreferences = application.getSharedPreferences(
             UtilConstants.fileName,
             Context.MODE_PRIVATE
         )

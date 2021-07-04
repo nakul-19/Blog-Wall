@@ -4,6 +4,8 @@ import com.nakul.blogWall.models.auth.LoginModel
 import com.nakul.blogWall.models.auth.LoginResponse
 import com.nakul.blogWall.models.auth.RegisterModel
 import com.nakul.blogWall.models.auth.RegisterResponse
+import com.nakul.blogWall.models.tokens.TokenRefreshModel
+import com.nakul.blogWall.models.tokens.TokenRefreshResponse
 import com.nakul.blogWall.utils.UtilConstants
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,4 +24,7 @@ interface AuthInterface {
 
     @POST(UtilConstants.login)
     suspend fun login(@Body m: LoginModel): Response<LoginResponse>
+
+    @POST(UtilConstants.refresh)
+    suspend fun refreshToken(@Body m: TokenRefreshModel): Response<TokenRefreshResponse>
 }

@@ -3,18 +3,42 @@ package com.nakul.blogWall.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.nakul.blogWall.models.Blog
+import androidx.lifecycle.viewModelScope
+import com.nakul.blogWall.models.blog.BlogResponse
+import com.nakul.blogWall.models.network_event.Event
+import com.nakul.blogWall.network.ApiException
+import com.nakul.blogWall.network.BlogInterface
+import com.nakul.blogWall.repositories.BlogRepository
+import kotlinx.coroutines.launch
 
-class CategoryViewModel : ViewModel() {
+class CategoryViewModel() : ViewModel() {
 
-    private val mBlogList = MutableLiveData<ArrayList<Blog>>()
-    var blogList: LiveData<ArrayList<Blog>> = mBlogList
+    private val mBlogListResponse = MutableLiveData<Event<BlogResponse>>()
+    val blogListResponse: LiveData<Event<BlogResponse>>
 
-    fun getList(category: String) {
+    private val repository: BlogRepository
 
+    init {
+        mBlogListResponse.value = Event.Loading()
+        blogListResponse = mBlogListResponse
+        repository = BlogRepository(BlogInterface())
     }
 
-    fun clearList() {
-        mBlogList.postValue(ArrayList())
+    fun getList(offset: Int, category: String) {
+        mBlogListResponse.postValue(Event.Loading())
+
+        viewModelScope.launch {
+            try {
+                val res = repository.getCategoriesBlogs(offset, category)
+                mBlogListResponse.postValue(Event.Success(res))
+            } catch (e: Exception) {
+                if (e is ApiException) {
+                    mBlogListResponse.postValue(Event.Error(e.message.toString()))
+                } else {
+                    mBlogListResponse.postValue(Event.Error("No Internet."))
+                }
+            }
+        }
     }
+
 }

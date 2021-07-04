@@ -47,7 +47,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:resizeableActivity="false"
-            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
+            android:theme="@style/Theme.BlogWall" />
 
         <meta-data
             android:name="preloaded_fonts"

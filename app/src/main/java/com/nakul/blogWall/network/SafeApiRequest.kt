@@ -27,7 +27,7 @@ abstract class SafeApiRequest {
         throw ApiException(msg)
     }
 
-    suspend fun <T : Any> apiResponseCode(call: suspend () -> Response<T>): Boolean {
+    suspend fun <T : Any> requestNoResponse(call: suspend () -> Response<T>): Boolean {
 
         val response = call.invoke()
         if (response.code() / 100 == 2)
