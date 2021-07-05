@@ -25,10 +25,10 @@ class LikeCreateAPIView(CreateAPIView):
 
     def get_serializer_class(self):
         model_type = self.request.GET.get("type")
-        slug = self.request.GET.get("slug")
+        obj_id = self.request.GET.get("obj_id")
         return create_like_serializer(
                 model_type=model_type, 
-                slug=slug, 
+                obj_id=obj_id, 
                 user=self.request.user
                 )
 

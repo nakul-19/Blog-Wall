@@ -11,6 +11,20 @@ class LikeManager(models.Manager):
         qs = super(LikeManager, self).filter(content_type=content_type, object_id= obj_id)
         return qs
 
+    def create_by_model_type(self, model_type, obj_id, content, user):
+        model_qs = ContentType.objects.filter(model=model_type)
+        if model_qs.exists():
+            SomeModel = model_qs.first().model_class()
+            obj_qs = SomeModel.objects.filter(id=obj_id)
+            if obj_qs.exists() and obj_qs.count() == 1:
+                instance = self.model()
+                instance.content = content
+                instance.user = user
+                instance.content_type = model_qs.first()
+                instance.object_id = obj_qs.first().id
+                instance.save()
+                return instance
+        return None
 
 class Like(models.Model):
     like = models.IntegerField(default=0)
