@@ -2,13 +2,16 @@ from authentication.serializers import UserSerializer
 from rest_framework.serializers import (
     HyperlinkedIdentityField,
     ModelSerializer,
+    Serializer,
     SerializerMethodField,
     ValidationError
     )
+
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 
 from likes.models import Like
+from posts.models import Post
 User = get_user_model()
 
 def create_like_serializer(model_type='post',obj_id=None, user=None):
@@ -44,23 +47,33 @@ def create_like_serializer(model_type='post',obj_id=None, user=None):
             else:
                 main_user = User.objects.all().first()
             model_type = self.model_type
-            
-            like = Like.objects.create_by_model_type(
-                    model_type,obj_id, like, main_user,
-                    )
+            like_present = main_user.user_like.filter(object_id=obj_id)
+            # print(like_present)
+            if like_present:
+                # like_updated = main_user.user_like.filter(object_id=obj_id)[0].like
+                like_id = main_user.user_like.filter(object_id=obj_id)[0].id
+                obj = Like.objects.get(id=like_id)
+                obj.like = like+1
+                obj.save()
+                # print(like_id)
+            else:
+                like = Like.objects.create_by_model_type(
+                        model_type,obj_id, like, main_user,
+                        )
             return like
+        
 
     return LikeCreateSerializer
 
 
 class LikeListSerializer(ModelSerializer):
-    user = UserSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
     class Meta:
         model = Like
         fields = [
             'id',
             'like',
-            'user',
+            #  'user',
         ]
     
     

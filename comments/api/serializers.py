@@ -14,7 +14,7 @@ from comments.models import Comment
 
 User = get_user_model()
 
-def create_comment_serializer(model_type='post', slug=None, parent_id=None, user=None):
+def create_comment_serializer(model_type='post', obj_id=None, parent_id=None, user=None):
     class CommentCreateSerializer(ModelSerializer):
         class Meta:
             ref_name = "CommentCreate"
@@ -26,7 +26,7 @@ def create_comment_serializer(model_type='post', slug=None, parent_id=None, user
             ]
         def __init__(self, *args, **kwargs):
             self.model_type = model_type
-            self.slug = slug
+            self.obj_id = obj_id
             self.parent_obj = None
             if parent_id:
                 parent_qs = Comment.objects.filter(id=parent_id)
@@ -40,7 +40,7 @@ def create_comment_serializer(model_type='post', slug=None, parent_id=None, user
             if not model_qs.exists() or model_qs.count() != 1:
                 raise ValidationError("This is not a valid content type")
             SomeModel = model_qs.first().model_class()
-            obj_qs = SomeModel.objects.filter(slug=self.slug)
+            obj_qs = SomeModel.objects.filter(id=self.obj_id)
             if not obj_qs.exists() or obj_qs.count() != 1:
                 raise ValidationError("This is not a slug for this content type")
             return data
@@ -52,10 +52,10 @@ def create_comment_serializer(model_type='post', slug=None, parent_id=None, user
             else:
                 main_user = User.objects.all().first()
             model_type = self.model_type
-            slug = self.slug
+            obj_id = self.obj_id
             parent_obj = self.parent_obj
             comment = Comment.objects.create_by_model_type(
-                    model_type, slug, content, main_user,
+                    model_type, obj_id, content, main_user,
                     parent_obj=parent_obj,
                     )
             return comment

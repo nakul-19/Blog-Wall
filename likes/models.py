@@ -11,14 +11,14 @@ class LikeManager(models.Manager):
         qs = super(LikeManager, self).filter(content_type=content_type, object_id= obj_id)
         return qs
 
-    def create_by_model_type(self, model_type, obj_id, content, user):
+    def create_by_model_type(self, model_type, obj_id, like, user):
         model_qs = ContentType.objects.filter(model=model_type)
         if model_qs.exists():
             SomeModel = model_qs.first().model_class()
             obj_qs = SomeModel.objects.filter(id=obj_id)
             if obj_qs.exists() and obj_qs.count() == 1:
                 instance = self.model()
-                instance.content = content
+                instance.like = like
                 instance.user = user
                 instance.content_type = model_qs.first()
                 instance.object_id = obj_qs.first().id
@@ -27,8 +27,9 @@ class LikeManager(models.Manager):
         return None
 
 class Like(models.Model):
-    like = models.IntegerField(default=0)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    like = models.IntegerField(default=0,)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
+                            default=1,related_name='user_like' )
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')

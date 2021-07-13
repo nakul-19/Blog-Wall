@@ -43,18 +43,16 @@ class CommentCreateAPIView(CreateAPIView):
 
     def get_serializer_class(self):
         model_type = self.request.GET.get("type")
-        slug = self.request.GET.get("slug")
+        obj_id = self.request.GET.get("obj_id")
         parent_id = self.request.GET.get("parent_id", None)
         return create_comment_serializer(
                 model_type=model_type, 
-                slug=slug, 
+                obj_id=obj_id, 
                 parent_id=parent_id,
                 user=self.request.user
                 )
 
-    # def perform_create(self, serializer):
-    #     serializer.save(user=self.request.user)
-
+    
 
 class CommentDetailAPIView(DestroyModelMixin, UpdateModelMixin, RetrieveAPIView):
     queryset = Comment.objects.filter(id__gte=0)
@@ -76,7 +74,7 @@ class CommentListAPIView(ListAPIView):
     pagination_class = PostPageNumberPagination 
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = Comment.objects.filter(id__gte=0) #filter(user=self.request.user)
+        queryset_list = Comment.objects.filter(id__gte=0) 
         query = self.request.GET.get("q")
         if query:
             queryset_list = queryset_list.filter(
