@@ -53,7 +53,7 @@ def create_like_serializer(model_type='post',obj_id=None, user=None):
                 # like_updated = main_user.user_like.filter(object_id=obj_id)[0].like
                 like_id = main_user.user_like.filter(object_id=obj_id)[0].id
                 obj = Like.objects.get(id=like_id)
-                obj.like = like+1
+                obj.like = obj.like +1
                 obj.save()
                 # print(like_id)
             else:
