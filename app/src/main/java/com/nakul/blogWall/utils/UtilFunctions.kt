@@ -45,9 +45,10 @@ object UtilFunctions {
         dateFormat: String = "yyyy-MM-dd",
         timeZone: TimeZone = TimeZone.getTimeZone("UTC")
     ): Date {
-        val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+        val date = dateFormat.substringBefore('T')
+        val parser = SimpleDateFormat(date, Locale.getDefault())
         parser.timeZone = timeZone
-        return parser.parse(this)!!
+        return parser.parse(this)
     }
 
     fun Date.format(dateFormat: String = "dd MMM',' yyyy", timeZone: TimeZone = TimeZone.getDefault()): String {

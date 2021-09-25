@@ -49,4 +49,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun setImage(call:(url: String?) -> Unit) {
+        val dp = sp.getString(UtilConstants.userImage,"")
+        call.invoke(dp)
+    }
+
+    fun getName(): String {
+        val name = sp.getString(UtilConstants.name,"")?:""
+        return name
+    }
+
+    fun logout() {
+        sp.edit().clear().commit()
+    }
+
 }

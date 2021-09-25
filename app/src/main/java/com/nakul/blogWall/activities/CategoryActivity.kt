@@ -53,6 +53,7 @@ class CategoryActivity : AppCompatActivity() {
 
 
     private fun fetchData() {
+        isLoading=true
         viewModel.getList(list.size, category)
     }
 
@@ -62,8 +63,10 @@ class CategoryActivity : AppCompatActivity() {
                 is Event.Loading -> {
                     if (list.isEmpty())
                         startShimmer()
+                    isLoading=true
                 }
                 is Event.Success -> {
+                    isLoading=false
                     if (it.r.results.isEmpty()) {
                         allFetched = true
                         b.loading.visibility = View.GONE
@@ -74,14 +77,15 @@ class CategoryActivity : AppCompatActivity() {
                         }
                         return@observe
                     } else {
-//                        val oldSize = list.size
+                        val oldSize = list.size
                         stopShimmer()
                         list.addAll(it.r.results)
                         Log.d("Category Activity",list.size.toString()+" "+it.r.results.size.toString())
-                        adapter.notifyDataSetChanged()
+                        adapter.notifyItemRangeInserted(oldSize,it.r.results.size)
                     }
                 }
                 is Event.Error -> {
+                    isLoading=false
                     Snackbar.make(b.root,it.msg,Snackbar.LENGTH_INDEFINITE).setAction("Retry") {
                         fetchData()
                     }.show()
@@ -95,19 +99,21 @@ class CategoryActivity : AppCompatActivity() {
         Glide.with(this).load(R.raw.loading_gif).into(b.loading)
         adapter = BlogAdapter(list)
 
-        val layoutManager = LinearLayoutManager(this)
-        b.blogRecycler.layoutManager = layoutManager
+        b.blogRecycler.layoutManager = LinearLayoutManager(this)
         b.blogRecycler.adapter = adapter
-        b.blogRecycler.addOnScrollListener(object : PaginationScroller(layoutManager) {
+        b.blogRecycler.addOnScrollListener(object : PaginationScroller(b.blogRecycler) {
             override fun isLast(): Boolean {
+                Log.d("scroller","isLast called")
                 return allFetched
             }
 
             override fun isLoading(): Boolean {
+                Log.d("scroller","isLoading called")
                 return isLoading
             }
 
             override fun loadMore() {
+                Log.d("scroller","loadMore called")
                 fetchData()
             }
 

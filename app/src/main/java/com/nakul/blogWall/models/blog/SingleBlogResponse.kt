@@ -1,10 +1,12 @@
 package com.nakul.blogWall.models.blog
 
 import com.google.gson.annotations.SerializedName
+import com.nakul.blogWall.models.like_and_comment.Comment
 import com.nakul.blogWall.models.like_and_comment.Like
 import com.nakul.blogWall.models.user.User
 
-data class Blog(
+data class SingleBlogResponse(
+    val comments: ArrayList<Comment>,
     val content: String,
     val id: Int,
     val image: String?,

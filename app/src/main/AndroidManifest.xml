@@ -14,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlogWall"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.BlogActivity" android:theme="@style/Theme.BlogWall"/>
+        <activity android:name=".activities.NewBlogActivity"
+            android:theme="@style/Theme.BlogWall.ActionBar" />
+        <activity
+            android:name=".activities.CommentActivity"
+            android:theme="@style/Theme.BlogWall.ActionBar" />
+        <activity
+            android:name=".activities.BlogActivity"
+            android:theme="@style/Theme.BlogWall" />
         <activity
             android:name=".activities.CategoryActivity"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />

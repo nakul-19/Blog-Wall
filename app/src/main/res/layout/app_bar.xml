@@ -25,8 +25,21 @@
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:src="@color/black"
+        android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white_ex"
+        android:translationX="-50dp"
+        android:translationY="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/user_image"
+        app:layout_constraintEnd_toEndOf="@id/user_image"
+        app:layout_constraintStart_toStartOf="@id/user_image"
+        app:layout_constraintTop_toTopOf="@id/user_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

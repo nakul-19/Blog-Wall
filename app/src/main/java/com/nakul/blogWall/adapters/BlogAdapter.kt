@@ -18,7 +18,7 @@ class BlogAdapter(val list: ArrayList<Blog>) : RecyclerView.Adapter<BlogAdapter.
     )
 
     override fun onBindViewHolder(h: VH, pos: Int) {
-        h.binding.blogAuthor.text = list[pos].owner.username
+        h.binding.blogAuthor.text = list[pos].owner.name
         h.binding.blogHeading.text = list[pos].title
         h.binding.blogDetails.text = list[pos].publish.toDate().format()
         Glide.with(h.itemView.context).load(list[pos].image).into(h.binding.blogImage)

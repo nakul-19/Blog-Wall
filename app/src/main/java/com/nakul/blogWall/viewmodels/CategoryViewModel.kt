@@ -27,9 +27,13 @@ class CategoryViewModel() : ViewModel() {
     fun getList(offset: Int, category: String) {
         mBlogListResponse.postValue(Event.Loading())
 
+        var c = category
+        if (c[0]=='H')
+            c=c.substringBefore(' ')
+
         viewModelScope.launch {
             try {
-                val res = repository.getCategoriesBlogs(offset, category)
+                val res = repository.getCategoriesBlogs(offset, c)
                 mBlogListResponse.postValue(Event.Success(res))
             } catch (e: Exception) {
                 if (e is ApiException) {

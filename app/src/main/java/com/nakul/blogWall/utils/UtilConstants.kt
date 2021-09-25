@@ -16,7 +16,18 @@ object UtilConstants {
     const val login = "/auth/login/"
     const val refresh = "/auth/token/refresh/"
 
-    const val trending = "/api/posts/?limit=6"
-    const val categoryBlogs = "/api/posts/"
+    const val trending = "/api/posts/?ordering=likes&limit=6"
+    const val blogs = "/api/posts/"
+    const val likeBlog = "/api/likes/create/?type=post"
+    const val commentBlog = "/api/comments/create/?type=post"
+
+    const val newBlog = "/api/posts/create/"
+
+    const val technology = "Technology"
+    const val global = "Global Affairs"
+    const val health = "Health"
+    const val sports = "Sports"
+    const val science = "Science"
+    const val entertainment = "Entertainment"
 
 }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
-    android:background="@color/black"
     tools:context=".activities.BlogActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -32,16 +32,17 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="-26dp"
         android:clipToPadding="true"
         app:cardCornerRadius="24dp"
+        android:minHeight="1000dp"
         app:cardElevation="10dp"
-        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -124,10 +125,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/content" />
 
                     <LinearLayout
-                        android:id="@+id/action_buttons"
+                        android:id="@+id/action_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
+                        android:visibility="gone"
                         android:orientation="horizontal"
                         app:layout_constraintTop_toBottomOf="@id/author_image">
 
@@ -181,13 +183,15 @@
                         android:layout_marginBottom="40dp"
                         android:fontFamily="@font/open_sans"
                         android:gravity="center"
+                        android:id="@+id/show_comments"
                         android:padding="6dp"
                         android:text="Show Comments"
+                        android:visibility="invisible"
                         android:textAllCaps="true"
                         android:textColor="@color/text_black"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/action_buttons" />
+                        app:layout_constraintTop_toBottomOf="@id/action_details" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.core.widget.NestedScrollView>
@@ -199,11 +203,36 @@
                 android:layout_margin="20dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_clap_filled"
+                android:visibility="gone"
                 app:backgroundTint="@color/white_ex"
                 app:elevation="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:tint="@color/black" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/like_bubble"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginBottom="68dp"
+                android:clipToPadding="true"
+                android:elevation="14dp"
+                android:visibility="gone"
+                app:cardCornerRadius="36dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/like_button"
+                app:layout_constraintStart_toStartOf="@id/like_button">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:text="+1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

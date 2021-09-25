@@ -24,7 +24,7 @@ abstract class SafeApiRequest {
             }
         }
 
-        throw ApiException(msg)
+        throw ApiException(msg,response.code())
     }
 
     suspend fun <T : Any> requestNoResponse(call: suspend () -> Response<T>): Boolean {
@@ -33,11 +33,22 @@ abstract class SafeApiRequest {
         if (response.code() / 100 == 2)
             return true
 
-        throw ApiException(response.message())
+        var msg = ""
+        val error = response.errorBody()?.string()
+
+        error?.let {
+            try {
+                msg += JSONObject(it).getString("detail")
+            } catch (e: JSONException) {
+                msg = response.message()
+            }
+        }
+
+        throw ApiException(msg,response.code())
 
     }
 
 }
 
 //Exception Class
-class ApiException(e: String) : Exception(e)
+class ApiException(e: String, val code: Int?=null) : Exception(e)

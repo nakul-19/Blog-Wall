@@ -1,6 +1,10 @@
 package com.nakul.blogWall.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,8 +35,15 @@ class MainActivity : AppCompatActivity() {
         setAppBar()
         setCategories()
         setTrendingUI()
+        setClick()
         setObserver()
         fetchData()
+    }
+
+    private fun setClick() {
+        binding.newBlog.setOnClickListener {
+            startActivity(Intent(this,NewBlogActivity::class.java))
+        }
     }
 
     private fun setObserver() {
@@ -40,9 +51,10 @@ class MainActivity : AppCompatActivity() {
 
             when (it) {
                 is Event.Error -> {
-                    Snackbar.make(binding.root, it.msg, Snackbar.LENGTH_INDEFINITE).setAction("Retry") {
-                        fetchData()
-                    }.show()
+                    Snackbar.make(binding.root, it.msg, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry") {
+                            fetchData()
+                        }.show()
                 }
                 is Event.Success -> {
                     trendingList.clear()
@@ -82,8 +94,43 @@ class MainActivity : AppCompatActivity() {
     private fun setAppBar() {
         binding.bar.appBarText.text =
             UtilFunctions.getGreetings()
-        Glide.with(this)
-            .load("https://mediaslide-europe.storage.googleapis.com/uno/pictures/2977/41110/profile-1540283773-5ac020b51f559faf895c30a9189b5b4d.jpg")
-            .into(binding.bar.userImage)
+        viewModel.setImage() { url: String? ->
+            Glide.with(this)
+                .load(url)
+                .into(binding.bar.userImage)
+        }
+        binding.bar.spinner.apply {
+            val optionList= arrayListOf(viewModel.getName(),"Logout")
+            adapter =
+                ArrayAdapter(
+                    this@MainActivity,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    optionList
+                )
+
+            this.post{
+                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parentView: AdapterView<*>?,
+                        selectedItemView: View?, position: Int, id: Long
+                    ) {
+                        when(position) {
+                            0-> { }
+                            1-> {
+                                viewModel.logout()
+                                this@MainActivity.startActivity(Intent(this@MainActivity,LoginActivity::class.java))
+                                this@MainActivity.finish()
+                            }
+                        }
+                    }
+
+                    override fun onNothingSelected(arg0: AdapterView<*>?) {}
+                }
+            }
+
+        }
+        binding.bar.userImage.setOnClickListener {
+            binding.bar.spinner.performClick()
+        }
     }
 }
