@@ -40,17 +40,17 @@ Blog wall is a blogging app where readers can find lots of insightful and inform
 
 <table align="center">
   <tbody><tr>
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_1.jpg" height="400px;">
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_2.jpg" height="400px;">
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_3.jpg" height="400px;">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_1.jpg">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_2.jpg">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_3.jpg">
   </tr></tbody>
 </table>
 
 <table align="center">
   <tbody><tr>
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_4.jpg" height="400px;">
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_5.jpg" height="400px;">
-    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_6.jpg" height="400px;">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_4.jpg">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_5.jpg">
+    <td align="center"><img src="https://github.com/nakul-19/Blog-Wall/blob/android/screenshots/Screenshot_6.jpg">
   </tr></tbody>
 </table>
 
