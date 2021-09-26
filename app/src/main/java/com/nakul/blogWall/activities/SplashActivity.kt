@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val anim = AnimationUtils.loadAnimation(this, R.anim.bounce)
+        val anim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         anim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(p0: Animation?) {}
 

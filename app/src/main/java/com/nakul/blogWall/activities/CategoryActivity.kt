@@ -5,21 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.nakul.blogWall.R
 import com.nakul.blogWall.adapters.BlogAdapter
-import com.nakul.blogWall.adapters.PaginationScroller
 import com.nakul.blogWall.databinding.ActivityCategoryBinding
 import com.nakul.blogWall.models.blog.Blog
 import com.nakul.blogWall.models.network_event.Event
 import com.nakul.blogWall.viewmodels.CategoryViewModel
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.coroutines.delay
 
 class CategoryActivity : AppCompatActivity() {
 
@@ -37,6 +37,8 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var adapter: BlogAdapter
     var allFetched = false
     var isLoading = false
+    var isLastPage = false
+    var isScrolling = true
     private val list = ArrayList<Blog>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +65,10 @@ class CategoryActivity : AppCompatActivity() {
                 is Event.Loading -> {
                     if (list.isEmpty())
                         startShimmer()
+                    else {
+                        b.loading.visibility=View.VISIBLE
+                        b.blogRecycler.setPadding(0,0,0,30)
+                    }
                     isLoading=true
                 }
                 is Event.Success -> {
@@ -79,6 +85,8 @@ class CategoryActivity : AppCompatActivity() {
                     } else {
                         val oldSize = list.size
                         stopShimmer()
+                        b.loading.visibility = View.GONE
+                        b.blogRecycler.setPadding(0,0,0,0)
                         list.addAll(it.r.results)
                         Log.d("Category Activity",list.size.toString()+" "+it.r.results.size.toString())
                         adapter.notifyItemRangeInserted(oldSize,it.r.results.size)
@@ -86,6 +94,8 @@ class CategoryActivity : AppCompatActivity() {
                 }
                 is Event.Error -> {
                     isLoading=false
+                    b.loading.visibility=View.GONE
+                    b.blogRecycler.setPadding(0,0,0,0)
                     Snackbar.make(b.root,it.msg,Snackbar.LENGTH_INDEFINITE).setAction("Retry") {
                         fetchData()
                     }.show()
@@ -101,23 +111,36 @@ class CategoryActivity : AppCompatActivity() {
 
         b.blogRecycler.layoutManager = LinearLayoutManager(this)
         b.blogRecycler.adapter = adapter
-        b.blogRecycler.addOnScrollListener(object : PaginationScroller(b.blogRecycler) {
-            override fun isLast(): Boolean {
-                Log.d("scroller","isLast called")
-                return allFetched
-            }
+        b.blogRecycler.addOnScrollListener(scrollListener)
+    }
 
-            override fun isLoading(): Boolean {
-                Log.d("scroller","isLoading called")
-                return isLoading
-            }
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
 
-            override fun loadMore() {
-                Log.d("scroller","loadMore called")
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+
+            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val shouldPaginate =
+                isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isScrolling
+
+            if (shouldPaginate) {
                 fetchData()
+                isScrolling = false
             }
+        }
 
-        })
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
+            }
+        }
     }
 
     private fun startShimmer() {
