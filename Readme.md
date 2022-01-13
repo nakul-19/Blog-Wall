@@ -1,4 +1,32 @@
-# Blog-Wall
+# Blog-Wall API
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technology Stack to be used](#technology-stack-to-be-used)
+4. [GitHub Repository Structure](#github-repository-structure)
+5. [Getting Started](#getting-started)
+	1. [Fork, clone locally and create a branch](#fork-clone-locally--create-a-branch)
+	1. [Setting Environment First Time](#setting-environment-first-time)
+		1. [Basic Requirements](#basic-requirements)
+		1. [Creating Virtual Environment](#creating-virtual-environment)
+		1. [Installing Requirements](#installing-requirements)
+		1. [Setting up Environment File](#setting-up-environment-file)
+		1. [Migrating Database](#migrating-database)
+		1. [Create Superuser](#create-superuser)
+	1. [Starting Development Server](#starting-development-server)
+	1. [Leaving the virtual environment](#leaving-the-virtual-environment)
+	1. [Update requirements file](#update-requirements-file-critical)
+	1. [Update Database](#update-database)  
+6. [Developers](#developers)
+7. [Maintainers](#maintainers)
+
+
+
+## Introduction
+
+This is the backdoor REST API developed to  integrate and manage Blogger content for Blog wall  android app. 
 
 Blog wall is a blogging android application where readers can find lots of insightful and informational articles related to a wide variety of topics that include technology, science, health, etc. Anyone can share their ideas through publishing their useful blogs and engage in conversation with a network of readers and writers by interacting with the content.
 
@@ -43,8 +71,11 @@ Blog wall is a blogging android application where readers can find lots of insig
 | 1. | [backend](https://github.com/nakul-19/Blog-Wall/tree/backend) | contains all backend code |
 | 2. | [android](https://github.com/nakul-19/Blog-Wall/tree/android) | contains all android code |
 
+## Getting Started
 
-### Backend Setup Instructions
+### Fork, clone locally & create a branch
+
+Fork [Blog Wall Backend](https://github.com/nakul-19/Blog-Wall) repository and clone at your local 
 
 - Fork and Clone the repo using
 ```
@@ -54,34 +85,140 @@ $ git clone https://github.com/nakul-19/Blog-Wall.git
 ```
 $ git checkout backend
 ```
-- Setup Virtual environment
+### Setting Environment First Time
+
+#### Basic Requirements 
+1. [Python](https://www.python.org/downloads/)
+1. [pip](https://pip.pypa.io/en/stable/installation/)
+
+#### Creating [Virtual Environment](https://docs.python.org/3/library/venv.html) 
+
+A virtual environment is a tool that helps keep dependencies required and the project isolated. If you wish to install a new library and write
 ```
-$ python3 -m venv env
-```
-- Activate the virtual environment
-```
-$ source env/bin/activate
-```
-- Install dependencies using
-```
-$ pip3 install -r requirements.txt
-```
-- Make migrations using
-```
-$ python3 manage.py makemigrations
-```
-- Migrate Database
-```
-$ python3 manage.py migrate
-```
-- Create a superuser
-```
-$ python3 manage.py createsuperuser
-```
-- Run server using
-```
-$ python3 manage.py runserver
+pip install name_of_library
 ``` 
+on the terminal without activating an environment, all the packages will be installed globally which is not a good practice if you’re working with different projects on your computer.
+
+If this sounds a bit complicated, don’t worry so much because a virtual environment is just a directory that will contain all the necessary files for our project to run.
+
+**Installing venv (required once)**
+
+**Windows**
+```
+py -m pip install --user virtualenv
+py -m venv env
+```
+**Linux**
+```
+python3 -m pip install --user virtualenv
+python3 -m venv env
+```
+
+You have to start virtual environment everytime you start new terminal -
+
+**Windows**
+
+Using gitbash
+```
+. env/Scripts/activate
+```
+Using Powershell
+```
+. env\Scripts\activate
+```
+**Linux**
+```
+source env/bin/activate
+```
+
+#### Installing Requirements 
+
+**Windows**
+```
+pip install -r requirements.txt
+```
+**Linux**
+```
+pip3 install -r requirements.txt
+```
+#### Setting up Environment File
+
+**Configuring Environment Variables**
+
+Make environment file by copying the example file -
+```
+cp .env.example .env
+``` 
+
+**GMAIL Settings**
+
+You need to [turn on less secure app access](https://support.google.com/accounts/answer/6010255?hl=en) for sending mails. 
+```
+EMAIL_HOST_USER = your_mail_id
+EMAIL_HOST_PASSWORD = your_password
+```
+
+#### Migrating Database
+**Windows**
+```
+py manage.py migrate
+```
+**Linux**
+```
+python3 manage.py migrate
+```
+
+#### Create Superuser
+**Windows**
+```
+py manage.py createsupeser
+```
+**Linux**
+```
+python3 manage.py createsupeser
+```
+
+### Starting Development Server
+**Windows**
+```
+py manage.py runserver
+```
+**Linux**
+```
+python3 manage.py runserver
+``` 
+
+### Leaving the virtual environment
+```
+deactivate
+```
+
+### Update requirements file (Critical)
+If you have installed new dependency, the pip freeze command lists the third-party packages and versions installed in the environment. 
+
+**Windows**
+```
+pip freeze > requirements.txt
+```
+**Linux**
+```
+pip3 freeze > requirements.txt
+```
+
+### Update Database  
+Everytime you change db models, you need to run makemigrations and migrate to update on database.
+
+**Windows**
+```
+py manage.py makemigrations
+py manage.py migrate
+```
+**Linux**
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+``` 
+
 ## Developers:
 
 > "Alone we can do so little; together we can do so much."
@@ -92,7 +229,7 @@ $ python3 manage.py runserver
 | 2. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
 
 
-## Maintainers ✨
+## Maintainers✨
 
 <table>
   <tbody><tr>
