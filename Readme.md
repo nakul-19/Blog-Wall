@@ -2,6 +2,24 @@
 
 Blog wall is a blogging android application where readers can find lots of insightful and informational articles related to a wide variety of topics that include technology, science, health, etc. Anyone can share their ideas through publishing their useful blogs and engage in conversation with a network of readers and writers by interacting with the content.
 
+## Features
+
+1. Login/Sign Up.
+2. JWT Authentication.
+3. Email Verification.
+4. Add blog posts related to various categories like Technology, Sports, Global Affairs, etc.
+5. Add comments to the post or reply to the existing comments.
+6. Search blog post of a particular category using title.
+7. Filter posts based on its category, title, author, etc.
+8. Able to edit existing post and comments.
+9. Sort blog posts according to different fields in ascending or descending order.
+10. View list of comments and replies related to particular posts.
+11. Search list of comments on several posts using auther's email.
+12. LimitOffsetPagination for custom pagination style.
+13. Add likes to particalur posts.
+14. View number of likes for a blog post by a particular user.
+
+ 
 ## Technology Stack to be used:
 
 <img src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/sqlite-0B96B2?style=for-the-badge&logo=sqlite&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
