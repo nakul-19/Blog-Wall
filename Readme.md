@@ -37,15 +37,15 @@ Blog wall is a blogging android application where readers can find lots of insig
 3. Email Verification.
 4. Add blog posts related to various categories like Technology, Sports, Global Affairs, etc.
 5. Add comments to the post or reply to the existing comments.
-6. Search blog post of a particular category using title.
-7. Filter posts based on its category, title, author, etc.
-8. Able to edit existing post and comments.
+6. Search blog posts of a particular category using the title.
+7. Filter posts based on their category, title, author, etc.
+8. Able to edit existing posts and comments.
 9. Sort blog posts according to different fields in ascending or descending order.
-10. View list of comments and replies related to particular posts.
-11. Search list of comments on several posts using auther's email.
+10. View the list of comments and replies related to particular posts.
+11. Search list of comments on several posts using author's email.
 12. LimitOffsetPagination for custom pagination style.
-13. Add likes to particalur posts.
-14. View number of likes for a blog post by a particular user.
+13. Add likes to particular posts.
+14. View the number of likes for a blog post by a particular user.
 
  
 ## Technology Stack to be used:
